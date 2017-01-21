@@ -36,7 +36,7 @@ public class WaterEffect : MonoBehaviour {
 	{
 		for (int i = 0; i < _vortex.Length; ++i)
 		{
-			_vortex [i].vortex.center = Vector2.SmoothDamp (_vortex [i].vortex.center, _vortex [i].target, ref _vortex [i].currVel, Time.deltaTime, 0.1f, Time.deltaTime);
+			_vortex [i].vortex.center = Vector2.SmoothDamp (_vortex [i].vortex.center, _vortex [i].target, ref _vortex [i].currVel, 10f, Mathf.Infinity, Time.deltaTime);
 		}
 	}
 
@@ -58,5 +58,18 @@ public class WaterEffect : MonoBehaviour {
 		{
 			_vortex [i].vortex.enabled = (GameManager.GM.CurrentWorld == GameManager.World.OLD);
 		}
+	}
+
+	/// <summary>
+	/// Updates the vortex angle. Val is clamped01.
+	/// </summary>
+	/// <param name="val">Value.</param>
+	public void UpdateVortexAngle(float val)
+	{
+		val = Mathf.Clamp01 (val);
+		for (int i = 0; i < _vortex.Length; ++i)
+		{
+			_vortex [i].vortex.angle = _vortex [i].angle * val;
+		}		
 	}
 }
