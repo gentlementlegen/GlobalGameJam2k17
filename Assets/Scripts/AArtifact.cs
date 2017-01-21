@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum eActivation
 {
@@ -18,6 +19,7 @@ public abstract class AArtifact : MonoBehaviour, IActivable {
 
 	[Header ("Artifact")]
 	[SerializeField] private eActivation	_state = eActivation.STOPED;
+	[SerializeField] private Text _message = null;
 
 	protected eActivation State
 	{
@@ -27,7 +29,23 @@ public abstract class AArtifact : MonoBehaviour, IActivable {
 
 	void Start()
 	{
-		
+		if (_message)
+			_message.enabled = false;
+	}
+
+	void FixedUpdate()
+	{
+		RaycastHit2D[] hits = Physics2D.CircleCastAll (transform.position, 2, transform.forward);
+	
+		foreach (RaycastHit2D hit in hits) {
+			if (hit.collider.tag == "Player") {
+				if (_message)
+					_message.enabled = true;
+				return;
+			}
+		}
+		if (_message)
+			_message.enabled = false;
 	}
 
 	//activate or disable the artifact
