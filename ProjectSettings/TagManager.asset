@@ -10,6 +10,7 @@ TagManager:
   - Fire
   - Attractible
   - Artifact
+  - Energized
   layers:
   - Default
   - TransparentFX
