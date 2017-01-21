@@ -44,7 +44,7 @@ public class PlayerController : BasicController {
 	bool CanClimb(out GameObject ladder)
 	{
 		ladder = null;
-		RaycastHit2D[] rh = Physics2D.RaycastAll(transform.position, transform.right * 0.2f, 0.9f);
+		RaycastHit2D[] rh = Physics2D.RaycastAll(transform.position, transform.right * 0.1f, 0.9f);
 		Debug.DrawRay (transform.position, transform.right, Color.red);
 		foreach (RaycastHit2D r in rh)
 		{
@@ -66,7 +66,10 @@ public class PlayerController : BasicController {
 
 		if (CanClimb(out ladder))
 		{
-			return ladder.GetComponent<Ladder> ().UseLadder (this);
+			if (ladder.GetComponent<Ladder> ().UseLadder (this))
+			{
+				return true;
+			}
 		}
 		return false;
 	}
@@ -77,5 +80,19 @@ public class PlayerController : BasicController {
 	bool Use()
 	{
 		return false;
+	}
+
+	public void StartClimbing()
+	{
+		PlayerState = PlayerController.ePlayerState.CLIMBING;
+		animator.SetBool (animClimb, true);
+		GetComponent<Rigidbody2D> ().simulated = false;
+	}
+
+	public void StopClimbing()
+	{
+		PlayerState = PlayerController.ePlayerState.ALIVE;
+		animator.SetBool (animClimb, false);
+		GetComponent<Rigidbody2D> ().simulated = true;
 	}
 }

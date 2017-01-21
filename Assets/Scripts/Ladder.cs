@@ -7,45 +7,43 @@ using UnityEngine;
 /// </summary>
 public class Ladder : MonoBehaviour {
 
-	private bool isClimbing = true;
+	[SerializeField] private float climbingSpeed = 10f;
+	private bool isClimbing = false;
 	PlayerController currentPlayerClimbing = null;
-	private Vector2 topPos;
-	private Vector2 botPos;
 	private Vector2 climbTarget;
 
-	void Start()
-	{
-		topPos = new Vector2(transform.position.x, this.transform.position.y - GetComponent<SpriteRenderer> ().sprite.rect.height / 2f);
-		botPos = new Vector2(transform.position.x, this.transform.position.y + GetComponent<SpriteRenderer> ().sprite.rect.height / 2f);
-	}
+	[SerializeField] private Transform topPos;
+	[SerializeField] private Transform botPos;
 	
 	void FixedUpdate ()
 	{
-		if (isClimbing)
+		if (isClimbing && currentPlayerClimbing != null)
 		{
-			currentPlayerClimbing.transform.position = Vector3.MoveTowards(currentPlayerClimbing.transform.position, climbTarget, 0.2f);
+			currentPlayerClimbing.transform.position = Vector3.MoveTowards(currentPlayerClimbing.transform.position, climbTarget, climbingSpeed * Time.deltaTime);
 		}
 	}
 
 	void StartClimbing()
 	{
-		
+		currentPlayerClimbing.transform.position = new Vector3 (climbTarget.x, currentPlayerClimbing.transform.position.y, currentPlayerClimbing.transform.position.z);
+		isClimbing = true;
 	}
 
 	void StopClimbing()
 	{
 		currentPlayerClimbing = null;
 		isClimbing = false;
+		currentPlayerClimbing.StopClimbing ();
 	}
 
 	public bool UseLadder(PlayerController pc)
 	{
 		if (isClimbing)
 			return false;
-		pc.PlayerState = PlayerController.ePlayerState.CLIMBING;
+		pc.StartClimbing ();
 		currentPlayerClimbing = pc;
 		GetClimbingTarget ();
-		isClimbing = true;
+		StartClimbing ();
 		return true;
 	}
 
@@ -54,6 +52,6 @@ public class Ladder : MonoBehaviour {
 	/// </summary>
 	void GetClimbingTarget()
 	{
-		climbTarget = (transform.position.y >= currentPlayerClimbing.transform.position.y) ? topPos : botPos;
+		climbTarget = (transform.position.y >= currentPlayerClimbing.transform.position.y) ? topPos.position : botPos.position;
 	}
 }
