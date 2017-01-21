@@ -17,7 +17,7 @@ public class PlayerController : BasicController {
 	private int animClimb;
 	private int animUse;
 
-    GameObject Item;
+    GameObject item;
 
 	protected override void Awake ()
 	{
@@ -87,6 +87,19 @@ public class PlayerController : BasicController {
 	/// </summary>
 	bool Use()
 	{
+        Collider2D[] detectObjects = Physics2D.OverlapCircleAll(transform.position, 0.5f);
+        foreach(Collider2D obj in detectObjects)
+        {
+            if (!obj.isTrigger)
+            {
+
+                IActivable composantActivable = obj.gameObject.GetComponent<IActivable>();
+                if (composantActivable != null)
+                {
+                    composantActivable.Activate();
+                }
+            }
+        }
 		return false;
 	}
 
@@ -114,5 +127,14 @@ public class PlayerController : BasicController {
         }
 
     }
+    public GameObject Item
+    {
+        get { return item; }
+        set { item = value; }
+    }
 
+    void ConsumeItem()
+    {
+        Destroy(Item);
+    }
 }
