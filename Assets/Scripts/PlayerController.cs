@@ -17,6 +17,8 @@ public class PlayerController : BasicController {
 	private int animClimb;
 	private int animUse;
 
+    GameObject Item;
+
 	protected override void Awake ()
 	{
 		base.Awake ();
@@ -82,6 +84,7 @@ public class PlayerController : BasicController {
 		return false;
 	}
 
+
 	public void StartClimbing()
 	{
 		PlayerState = PlayerController.ePlayerState.CLIMBING;
@@ -95,4 +98,15 @@ public class PlayerController : BasicController {
 		animator.SetBool (animClimb, false);
 		GetComponent<Rigidbody2D> ().simulated = true;
 	}
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Item" && Item == null)
+        {
+            collision.gameObject.SetActive(false);
+            Item = collision.gameObject;
+        }
+
+    }
+
 }

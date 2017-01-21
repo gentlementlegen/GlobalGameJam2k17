@@ -12,6 +12,7 @@ TagManager:
   - Artifact
   - Energized
   - Ladder
+  - Item
   layers:
   - Default
   - TransparentFX
