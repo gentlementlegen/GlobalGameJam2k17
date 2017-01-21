@@ -131,7 +131,7 @@ public class GameManager : AGameManager {
 				{
 					sp.color = new Color (sp.color.r, sp.color.g, sp.color.b, i);
 				}
-				waterEffect.UpdateVortexAngle (i);
+				waterEffect.UpdateVortexAngle (1 - i);
 
 				if (i < 0.5f)
 				{
