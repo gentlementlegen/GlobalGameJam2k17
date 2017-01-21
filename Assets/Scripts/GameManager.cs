@@ -5,6 +5,9 @@ using System.Linq;
 using UnityStandardAssets.ImageEffects;
 
 // TODO : smooth transition vortex
+using UnityEngine.Audio;
+
+
 public class GameManager : AGameManager {
 
 	[Header("GUI")]
@@ -27,6 +30,7 @@ public class GameManager : AGameManager {
 	private World _currentWorld = World.NEW;
 	private WaterEffect waterEffect;
 	private Bloom bloomEffect;
+	[SerializeField] private AudioMixerSnapshot[] audioSnapshots;
 
 	public World CurrentWorld
 	{
@@ -87,6 +91,7 @@ public class GameManager : AGameManager {
 	/// <param name="fadeDir">Fade dir.</param>
 	IEnumerator ChangeWorldCoroutine(int fadeDir = 1)
 	{
+		UpdateAudioMixer ();
 		if (fadeDir == 1)
 		{
 			for (float i = 0; i < 1; i += 0.025f)
@@ -150,6 +155,18 @@ public class GameManager : AGameManager {
 				}
 				yield return new WaitForSeconds (0.01f);
 			}			
+		}
+	}
+
+	void UpdateAudioMixer()
+	{
+		if (CurrentWorld == World.NEW)
+		{
+			audioSnapshots [0].TransitionTo (1f);
+		}
+		else
+		{
+			audioSnapshots [1].TransitionTo (1f);
 		}
 	}
 }
