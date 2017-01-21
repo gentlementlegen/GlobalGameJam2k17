@@ -88,8 +88,8 @@ public abstract class BasicController : MonoBehaviour {
 		}
 
 		animator.SetFloat( animHorizontalVel, Input.GetAxis("Horizontal") );
-//		animator.SetFloat( animVerticalVel, Mathf.Abs(this.GetComponent<Rigidbody2D>().velocity.y ));
-		animator.SetFloat( animVerticalVel, this.GetComponent<Rigidbody2D>().velocity.y );
+		animator.SetFloat( animVerticalVel, -Mathf.Abs(this.GetComponent<Rigidbody2D>().velocity.y ));
+//		animator.SetFloat( animVerticalVel, this.GetComponent<Rigidbody2D>().velocity.y );
 
 		#endregion
 
