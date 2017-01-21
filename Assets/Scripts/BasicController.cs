@@ -88,7 +88,9 @@ public abstract class BasicController : MonoBehaviour {
 		}
 
 		animator.SetFloat( animHorizontalVel, Input.GetAxis("Horizontal") );
-		animator.SetFloat( animVerticalVel, Mathf.Abs(this.GetComponent<Rigidbody2D>().velocity.y ));
+//		animator.SetFloat( animVerticalVel, Mathf.Abs(this.GetComponent<Rigidbody2D>().velocity.y ));
+		animator.SetFloat( animVerticalVel, this.GetComponent<Rigidbody2D>().velocity.y );
+
 		#endregion
 
 		if (jump.GetComponent<Jump>().getCanJump() && Input.GetAxis("Jump") != 0 && !timerJump) {
@@ -100,7 +102,7 @@ public abstract class BasicController : MonoBehaviour {
 			this.GetComponent<Rigidbody2D>().velocity = new Vector2(0, this.GetComponent<Rigidbody2D>().velocity.y);
 		}
 		if (Input.GetAxis("Horizontal") != 0 && !jump.GetComponent<Jump> ().getCanJump () && !WallJump) {
-			this.transform.Translate(new Vector2(horizontalStrength * Time.deltaTime * Input.GetAxis("Horizontal") * 0.8f,0));	
+			this.transform.Translate(new Vector2(horizontalStrength * Time.deltaTime * Input.GetAxis("Horizontal") * 0.8f, 0));	
 		}
 		if (Input.GetAxis("Horizontal") != 0 && jump.GetComponent<Jump> ().getCanJump ()) {
 			this.transform.Translate(new Vector2(horizontalStrength * Time.deltaTime * Input.GetAxis("Horizontal"), 0));
