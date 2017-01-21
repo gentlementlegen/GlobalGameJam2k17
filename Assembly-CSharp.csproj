@@ -199,6 +199,7 @@
      <Compile Include="Assets\Scripts\Fading.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Jump.cs" />
+     <Compile Include="Assets\Scripts\Ladder.cs" />
      <Compile Include="Assets\Scripts\LightBulb.cs" />
      <Compile Include="Assets\Scripts\MagneticArtifact.cs" />
      <Compile Include="Assets\Scripts\MainMenuManager.cs" />

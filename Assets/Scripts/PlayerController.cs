@@ -8,6 +8,12 @@ using System.Collections.Generic;
 /// </summary>
 public class PlayerController : BasicController {
 
+	public enum ePlayerState
+	{ ALIVE, DEAD, CLIMBING }
+
+	public ePlayerState PlayerState
+	{ get; set; }
+
 	private int animClimb;
 	private int animUse;
 
@@ -15,12 +21,15 @@ public class PlayerController : BasicController {
 	{
 		base.Awake ();
 
+		PlayerState = ePlayerState.ALIVE;
 		animClimb = Animator.StringToHash ("isClimbing");
 		animUse = Animator.StringToHash ("Use");
 	}
 
 	protected override void FixedUpdate ()
 	{
+		if (PlayerState == ePlayerState.CLIMBING)
+			return;
 		base.FixedUpdate ();
 		if (Input.GetButtonDown("Climb"))
 		{
@@ -57,7 +66,7 @@ public class PlayerController : BasicController {
 
 		if (CanClimb(out ladder))
 		{
-			return true;
+			return ladder.GetComponent<Ladder> ().UseLadder (this);
 		}
 		return false;
 	}
