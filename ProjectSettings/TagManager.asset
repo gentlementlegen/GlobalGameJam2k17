@@ -8,6 +8,7 @@ TagManager:
   - concrete
   - Ground
   - Fire
+  - Attractible
   layers:
   - Default
   - TransparentFX
