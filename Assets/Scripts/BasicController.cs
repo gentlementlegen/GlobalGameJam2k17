@@ -66,26 +66,6 @@ public abstract class BasicController : MonoBehaviour {
 		IsDead = false;
 	}
 
-	public void SetKeyBinds( int characterID )
-	{
-		if ( characterID == 1 )
-		{
-			keyBinds = new Dictionary<string, string>();
-			foreach ( string str in imputName )
-			{
-				keyBinds.Add( str, str );
-			}
-		}
-		else if ( characterID == 2 )
-		{
-			keyBinds = new Dictionary<string, string>();
-			foreach ( string str in imputName )
-			{
-				keyBinds.Add( str, str + "Alt" );
-			}
-		}
-	}
-
 	protected virtual void Update()
 	{
 		if ( attackCurrentDelay > 0 )
@@ -126,9 +106,9 @@ public abstract class BasicController : MonoBehaviour {
 			this.transform.Translate(new Vector2(horizontalStrength * Time.deltaTime * Input.GetAxis("Horizontal"), 0));
 		}
 		if (Input.GetAxis("Horizontal") < 0) {
-			this.transform.localScale = new Vector2(scale, this.transform.localScale.y);
-		} else if (Input.GetAxis("Horizontal") > 0) {
 			this.transform.localScale = new Vector2(scale * -1, this.transform.localScale.y);
+		} else if (Input.GetAxis("Horizontal") > 0) {
+			this.transform.localScale = new Vector2(scale, this.transform.localScale.y);
 		}
 
 		if ( Input.GetAxis("Fire1") == 1 && attackCurrentDelay <= 0 )
