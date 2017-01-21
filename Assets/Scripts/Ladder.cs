@@ -24,7 +24,7 @@ public class Ladder : MonoBehaviour {
 	{
 		if (isClimbing && currentPlayerClimbing != null)
 		{
-			currentPlayerClimbing.transform.position = Vector3.MoveTowards(currentPlayerClimbing.transform.position, climbTarget, climbingSpeed * Time.deltaTime);
+//			currentPlayerClimbing.transform.position = Vector3.MoveTowards(currentPlayerClimbing.transform.position, climbTarget, climbingSpeed * Time.deltaTime);
 			if (currentPlayerClimbing.transform.position.y == climbTarget.y)
 			{
 				StopClimbing ();

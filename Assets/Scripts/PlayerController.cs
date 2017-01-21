@@ -108,14 +108,16 @@ public class PlayerController : BasicController {
 	{
 		PlayerState = PlayerController.ePlayerState.CLIMBING;
 		animator.SetBool (animClimb, true);
-		GetComponent<Rigidbody2D> ().simulated = false;
+//		GetComponent<Rigidbody2D> ().simulated = false;
+		GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
 	}
 
 	public void StopClimbing()
 	{
 		PlayerState = PlayerController.ePlayerState.ALIVE;
 		animator.SetBool (animClimb, false);
-		GetComponent<Rigidbody2D> ().simulated = true;
+//		GetComponent<Rigidbody2D> ().simulated = true;
+		GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 	}
 
     void OnCollisionEnter2D(Collision2D collision)
