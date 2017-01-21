@@ -16,11 +16,13 @@ public class TemporalArtifact : AArtifact {
 
 	public override void OnActivated()
 	{
+		GameManager.GM.StopAllCoroutines ();
 		StartCoroutine (GameManager.GM.ChangeWorldCoroutine ());
 	}
 
 	public override void OnDisabled()
 	{
+		GameManager.GM.StopAllCoroutines();
 		StartCoroutine (GameManager.GM.ChangeWorldCoroutine (-1));
 	}
 }
