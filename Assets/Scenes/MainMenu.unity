@@ -178,6 +178,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 76762400}
+        m_MethodName: BeginFade2
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11423886
@@ -312,6 +323,7 @@ GameObject:
   - component: {fileID: 76762396}
   - component: {fileID: 76762395}
   - component: {fileID: 76762399}
+  - component: {fileID: 76762400}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -407,6 +419,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33bf53d63e7b73a42b5bdff44bfab90b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &76762400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 76762394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23314c93ef5a5cd47a7d9b76d65ab0d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutTexture: {fileID: 2800000, guid: c2e5446f01e072644a71a514bec74192, type: 3}
+  fadeSpeed: 0.8
 --- !u!1 &83412334
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameManager : AGameManager {
 
+	[Header("GUI")]
+	private Sprite loadingScreen;
+
 	public static GameManager GM
 	{ get; private set; }
 
@@ -48,5 +51,10 @@ public class GameManager : AGameManager {
 				_objects.Add (sp);
 		}
 		waterEffect = Camera.main.GetComponent<WaterEffect> ();
+	}
+
+	public override void Pause ()
+	{
+		base.Pause ();
 	}
 }
