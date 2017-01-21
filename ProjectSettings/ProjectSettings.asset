@@ -459,8 +459,9 @@ PlayerSettings:
   XboxOneAllowedProductIds: []
   XboxOnePersistentLocalStorageSize: 0
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
+  cloudServicesEnabled:
+    UNet: 1
+  cloudProjectId: b3350e04-bce6-4a2b-ac86-aeb1d70e746a
+  projectName: GGJ2017
+  organizationId: babiole
   cloudEnabled: 0

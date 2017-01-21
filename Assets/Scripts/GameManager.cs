@@ -23,6 +23,7 @@ public class GameManager : AGameManager {
 
 	public enum World
 	{ OLD, NEW }
+    public float bloom_intensity = 4;
 
 	private List<SpriteRenderer> _objectsWorldNew = new List<SpriteRenderer>();
 	private List<SpriteRenderer> _objectsWorldOld = new List<SpriteRenderer>();
@@ -30,6 +31,7 @@ public class GameManager : AGameManager {
 	private World _currentWorld = World.NEW;
 	private WaterEffect waterEffect;
 	private Bloom bloomEffect;
+    private ColorRampFade colorRampFade;
 	[SerializeField] private AudioMixerSnapshot[] audioSnapshots;
 
 	public World CurrentWorld
@@ -57,7 +59,9 @@ public class GameManager : AGameManager {
 		GetAllChildren (terrainWorldOld, ref _objectsWorldOld);
 		waterEffect = Camera.main.GetComponent<WaterEffect> ();
 		bloomEffect = Camera.main.GetComponent<Bloom> ();
-	}
+        colorRampFade = Camera.main.GetComponent<ColorRampFade>();
+        colorRampFade.Play();
+    }
 
 	void GetAllChildren(GameObject go, ref List<SpriteRenderer> list)
 	{
@@ -94,7 +98,8 @@ public class GameManager : AGameManager {
 		UpdateAudioMixer ();
 		if (fadeDir == 1)
 		{
-			for (float i = 0; i < 1; i += 0.025f)
+            colorRampFade.PlayBackward();
+            for (float i = 0; i < 1; i += 0.025f)
 			{
 				foreach (SpriteRenderer sp in _objectsWorldNew)
 				{
@@ -108,9 +113,9 @@ public class GameManager : AGameManager {
 
 				if (i < 0.5f)
 				{
-					bloomEffect.bloomIntensity = i * 2;
+					bloomEffect.bloomIntensity = i * bloom_intensity;
 				}
-				else if (Mathf.Round(i * 100f) / 100f == 0.5f)
+				else if (Mathf.Round(i * 100f) / 100f == 0.1f)
 				{
 					waterEffect.UpdateEffectState ();
 					_currentWorld = World.OLD;
@@ -119,14 +124,23 @@ public class GameManager : AGameManager {
 				}
 				else
 				{
-					bloomEffect.bloomIntensity = 2 - i * 2;
+					bloomEffect.bloomIntensity = bloom_intensity - i * bloom_intensity;
 				}
 				yield return new WaitForSeconds (0.01f);
 			}
-		}
+            foreach (SpriteRenderer sp in _objectsWorldNew)
+            {
+                sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0);
+            }
+            foreach (SpriteRenderer sp in _objectsWorldOld)
+            {
+                sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 1);
+            }
+        }
 		else
 		{
-			for (float i = 1; i >= 0; i -= 0.025f)
+            colorRampFade.Play();
+            for (float i = 1; i >= 0; i -= 0.025f)
 			{
 				foreach (SpriteRenderer sp in _objectsWorldNew)
 				{
@@ -140,9 +154,9 @@ public class GameManager : AGameManager {
 
 				if (i < 0.5f)
 				{
-					bloomEffect.bloomIntensity = i * 2;
+					bloomEffect.bloomIntensity = i * bloom_intensity;
 				}
-				else if (Mathf.Round(i * 100f) / 100f == 0.5f)
+				else if (Mathf.Round(i * 100f) / 100f == 0.1f)
 				{
 					waterEffect.UpdateEffectState ();
 					_currentWorld = World.NEW;
@@ -151,11 +165,19 @@ public class GameManager : AGameManager {
 				}
 				else
 				{
-					bloomEffect.bloomIntensity = 2 - i * 2;
+					bloomEffect.bloomIntensity = bloom_intensity - i * bloom_intensity;
 				}
 				yield return new WaitForSeconds (0.01f);
-			}			
-		}
+			}
+            foreach (SpriteRenderer sp in _objectsWorldNew)
+            {
+                sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 1);
+            }
+            foreach (SpriteRenderer sp in _objectsWorldOld)
+            {
+                sp.color = new Color(sp.color.r, sp.color.g, sp.color.b, 0);
+            }
+        }
 	}
 
 	void UpdateAudioMixer()
