@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Fire
   - Attractible
+  - Artifact
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Artifact
+  - Item
   - 
   - 
   - 

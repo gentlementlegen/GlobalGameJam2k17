@@ -16,7 +16,8 @@ public interface IActivable {
 
 public abstract class AArtifact : MonoBehaviour, IActivable {
 
-	private eActivation	_state = eActivation.STOPED;
+	[Header ("Artifact")]
+	[SerializeField] private eActivation	_state = eActivation.STOPED;
 
 	protected eActivation State
 	{
@@ -26,9 +27,10 @@ public abstract class AArtifact : MonoBehaviour, IActivable {
 
 	void Start()
 	{
-		Activate (eActivation.ACTIVATED);
+		
 	}
 
+	//activate or disable the artifact
 	public void Activate(eActivation state = eActivation.ACTIVATED)
 	{
 		if (this.State == state)

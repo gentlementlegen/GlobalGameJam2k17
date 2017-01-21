@@ -89,7 +89,7 @@ public class GameManager : AGameManager {
 	/// </summary>
 	/// <returns>The world coroutine.</returns>
 	/// <param name="fadeDir">Fade dir.</param>
-	IEnumerator ChangeWorldCoroutine(int fadeDir = 1)
+	public IEnumerator ChangeWorldCoroutine(int fadeDir = 1)
 	{
 		UpdateAudioMixer ();
 		if (fadeDir == 1)
