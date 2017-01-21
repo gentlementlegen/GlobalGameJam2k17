@@ -56,7 +56,13 @@ public class PlayerController : BasicController {
 				break;
 			}
 		}
-		return IsGrounded && ladder != null;
+		if (ladder == null
+			|| (!ladder.GetComponent<Ladder> ().isPointingRight && transform.localScale.x < 0)
+			|| (ladder.GetComponent<Ladder> ().isPointingRight && transform.localScale.x > 0))
+		{
+			return false;
+		}
+		return IsGrounded;
 	}
 
 	/// <summary>

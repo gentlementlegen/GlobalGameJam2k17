@@ -14,33 +14,42 @@ public class Ladder : MonoBehaviour {
 
 	[SerializeField] private Transform topPos;
 	[SerializeField] private Transform botPos;
+
+	/// <summary>
+	/// Is the ladder pointer right side ?
+	/// </summary>
+	public bool isPointingRight = false;
 	
 	void FixedUpdate ()
 	{
 		if (isClimbing && currentPlayerClimbing != null)
 		{
 			currentPlayerClimbing.transform.position = Vector3.MoveTowards(currentPlayerClimbing.transform.position, climbTarget, climbingSpeed * Time.deltaTime);
+			if (currentPlayerClimbing.transform.position.y == climbTarget.y)
+			{
+				StopClimbing ();
+			}
 		}
 	}
 
 	void StartClimbing()
 	{
+		currentPlayerClimbing.StartClimbing ();
 		currentPlayerClimbing.transform.position = new Vector3 (climbTarget.x, currentPlayerClimbing.transform.position.y, currentPlayerClimbing.transform.position.z);
 		isClimbing = true;
 	}
 
 	void StopClimbing()
 	{
+		currentPlayerClimbing.StopClimbing ();
 		currentPlayerClimbing = null;
 		isClimbing = false;
-		currentPlayerClimbing.StopClimbing ();
 	}
 
 	public bool UseLadder(PlayerController pc)
 	{
 		if (isClimbing)
 			return false;
-		pc.StartClimbing ();
 		currentPlayerClimbing = pc;
 		GetClimbingTarget ();
 		StartClimbing ();
