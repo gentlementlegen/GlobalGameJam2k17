@@ -159,6 +159,14 @@ public abstract class BasicController : MonoBehaviour {
 		protected set;
 	}
 
+	public bool IsGrounded
+	{
+		get
+		{
+			return jump.GetComponent<Jump> ().getCanJump ();
+		}
+	}
+
 	public int playerID
 	{
 		get
