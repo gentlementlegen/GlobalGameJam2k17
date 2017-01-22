@@ -101,6 +101,7 @@ public class GameManager : AGameManager {
             colorRampFade.PlayBackward();
             for (float i = 0; i < 1; i += 0.025f)
 			{
+				print (Mathf.Round(i * 100f) / 100f);
 				foreach (SpriteRenderer sp in _objectsWorldNew)
 				{
 					sp.color = new Color (sp.color.r, sp.color.g, sp.color.b, 1 - i);
@@ -111,12 +112,14 @@ public class GameManager : AGameManager {
 				}
 				waterEffect.UpdateVortexAngle (1 - i);
 
-				if (i < 0.5f)
+				float yolo = Mathf.Round (i * 100f) / 100f;
+				if (yolo < 0.1f)
 				{
 					bloomEffect.bloomIntensity = i * bloom_intensity;
 				}
-				else if (Mathf.Round(i * 100f) / 100f == 0.1f)
+				else if (yolo == 0.1f)
 				{
+					print ("sxugfusqodgcuuqs");
 					waterEffect.UpdateEffectState ();
 					_currentWorld = World.OLD;
 					particlesUnderwater.SetActive (false);
@@ -152,11 +155,12 @@ public class GameManager : AGameManager {
 				}
 				waterEffect.UpdateVortexAngle (1 - i);
 
-				if (i < 0.5f)
+				float yolo = Mathf.Round (i * 100f) / 100f;
+				if (yolo < 0.1f)
 				{
 					bloomEffect.bloomIntensity = i * bloom_intensity;
 				}
-				else if (Mathf.Round(i * 100f) / 100f == 0.1f)
+				else if (yolo == 0.1f)
 				{
 					waterEffect.UpdateEffectState ();
 					_currentWorld = World.NEW;

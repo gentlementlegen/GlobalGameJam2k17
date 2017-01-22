@@ -1065,11 +1065,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: 67f8781cad112c75d0008dfa8d76c639, type: 3}
   alpha: 1
-  duration: 10
+  duration: 1
   textureRamp: {fileID: 2800000, guid: d25fe7eb06a460c4ab79c51cffe5d285, type: 3}
   textureRamp1: {fileID: 2800000, guid: e3dd5e4943a7aa946949c969929b10c8, type: 3}
   factor: 1
-  loop: 0
+  loop: 1
 --- !u!1001 &1435763591
 Prefab:
   m_ObjectHideFlags: 0
@@ -1222,6 +1222,11 @@ Prefab:
         type: 2}
       propertyPath: Loop
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82013135045314324, guid: 21cb17c309a359a4da809b9bf9cee2e0,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 21cb17c309a359a4da809b9bf9cee2e0, type: 2}
