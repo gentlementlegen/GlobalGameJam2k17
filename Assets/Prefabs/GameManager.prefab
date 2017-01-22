@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114351571004055200}
   - component: {fileID: 114920627275410800}
   - component: {fileID: 82013135045314324}
+  - component: {fileID: 82263342136547472}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -50,9 +51,90 @@ AudioSource:
   m_GameObject: {fileID: 1477654175391296}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300001, guid: f92c7ef1bd194934895c8a06f3d2f477,
+  OutputAudioMixerGroup: {fileID: 243230589763500428, guid: f92c7ef1bd194934895c8a06f3d2f477,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: bd5e22e7b8996b44b9433559d034f9d6, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!82 &82263342136547472
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1477654175391296}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243518420047663676, guid: f92c7ef1bd194934895c8a06f3d2f477,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 7bcf6e6eafe47fe4ba2d5abd9db056f7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -137,6 +219,27 @@ MonoBehaviour:
   particlesUnderwater: {fileID: 0}
   terrainWorldNew: {fileID: 0}
   terrainWorldOld: {fileID: 0}
+  playerPrefab: {fileID: 1097201744538220, guid: 3b9363b574b213d44b52277504a76ffb,
+    type: 2}
+  spawnPoint: {fileID: 0}
+  dieEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: ReStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  bloom_intensity: 4
+  fader: {fileID: 114920627275410800}
   audioSnapshots:
   - {fileID: 24500003, guid: f92c7ef1bd194934895c8a06f3d2f477, type: 2}
   - {fileID: 245657011298677026, guid: f92c7ef1bd194934895c8a06f3d2f477, type: 2}
@@ -152,4 +255,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeOutTexture: {fileID: 2800000, guid: c2e5446f01e072644a71a514bec74192, type: 3}
-  fadeSpeed: 0.4
+  fadeSpeed: 0.6

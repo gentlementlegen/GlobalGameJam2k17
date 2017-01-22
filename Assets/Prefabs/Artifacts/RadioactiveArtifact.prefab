@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4414263874426468}
   - component: {fileID: 212843425708452270}
   - component: {fileID: 114770323605316040}
+  - component: {fileID: 61138532456967118}
   m_Layer: 8
   m_Name: RadioactiveArtifact
   m_TagString: Artifact
@@ -41,6 +42,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61138532456967118
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1157432726685644}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1.4, y: 2.76}
 --- !u!114 &114770323605316040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,6 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state: 1
+  _message: {fileID: 0}
   maxRange: 20
   fireRate: 1
   powerLoad: 100

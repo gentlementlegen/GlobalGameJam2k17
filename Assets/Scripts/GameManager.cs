@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Events;
 using UnityStandardAssets.ImageEffects;
 
 // TODO : smooth transition vortex
@@ -17,6 +18,11 @@ public class GameManager : AGameManager {
 	[Header("Terrain")]
 	[SerializeField] private GameObject terrainWorldNew;
 	[SerializeField] private GameObject terrainWorldOld;
+	[Header("Player")]
+	[SerializeField] private GameObject playerPrefab;
+	[SerializeField] private GameObject spawnPoint;
+	public UnityEvent[] dieEvents;
+	private GameObject playerInstance = null;
 
 	public static GameManager GM
 	{ get; private set; }
@@ -32,6 +38,7 @@ public class GameManager : AGameManager {
 	private WaterEffect waterEffect;
 	private Bloom bloomEffect;
     private ColorRampFade colorRampFade;
+	[SerializeField] private Fading fader;
 	[SerializeField] private AudioMixerSnapshot[] audioSnapshots;
 
 	public World CurrentWorld
@@ -61,6 +68,7 @@ public class GameManager : AGameManager {
 		bloomEffect = Camera.main.GetComponent<Bloom> ();
         colorRampFade = Camera.main.GetComponent<ColorRampFade>();
         colorRampFade.Play();
+		SpawnPlayer ();
     }
 
 	void GetAllChildren(GameObject go, ref List<SpriteRenderer> list)
@@ -71,9 +79,21 @@ public class GameManager : AGameManager {
 			list.AddRange (sp.ToList<SpriteRenderer> ());
 	}
 
-	public override void Pause ()
+	/// <summary>
+	/// Spawns the player.
+	/// </summary>
+	void SpawnPlayer()
 	{
-		base.Pause ();
+		playerInstance = (GameObject)Instantiate (playerPrefab, spawnPoint.transform.position, Quaternion.identity);
+		Camera.main.GetComponent<TravelingCamera> ().target = playerInstance.transform.FindChild("Target Camera").transform;
+	}
+
+	/// <summary>
+	/// Called when a checkpoint is reached.
+	/// </summary>
+	public void CheckpointReached(GameObject checkpoint)
+	{
+		spawnPoint = checkpoint;
 	}
 
 	void Update()
@@ -101,7 +121,6 @@ public class GameManager : AGameManager {
             colorRampFade.PlayBackward();
             for (float i = 0; i < 1; i += 0.025f)
 			{
-				print (Mathf.Round(i * 100f) / 100f);
 				foreach (SpriteRenderer sp in _objectsWorldNew)
 				{
 					sp.color = new Color (sp.color.r, sp.color.g, sp.color.b, 1 - i);
@@ -112,14 +131,13 @@ public class GameManager : AGameManager {
 				}
 				waterEffect.UpdateVortexAngle (1 - i);
 
-				float yolo = Mathf.Round (i * 100f) / 100f;
-				if (yolo < 0.1f)
+				float currVal = Mathf.Round (i * 100f) / 100f;
+				if (currVal < 0.1f)
 				{
 					bloomEffect.bloomIntensity = i * bloom_intensity;
 				}
-				else if (yolo == 0.1f)
+				else if (currVal == 0.1f)
 				{
-					print ("sxugfusqodgcuuqs");
 					waterEffect.UpdateEffectState ();
 					_currentWorld = World.OLD;
 					particlesUnderwater.SetActive (false);
@@ -155,12 +173,12 @@ public class GameManager : AGameManager {
 				}
 				waterEffect.UpdateVortexAngle (1 - i);
 
-				float yolo = Mathf.Round (i * 100f) / 100f;
-				if (yolo < 0.1f)
+				float currVal = Mathf.Round (i * 100f) / 100f;
+				if (currVal < 0.1f)
 				{
 					bloomEffect.bloomIntensity = i * bloom_intensity;
 				}
-				else if (yolo == 0.1f)
+				else if (currVal == 0.1f)
 				{
 					waterEffect.UpdateEffectState ();
 					_currentWorld = World.NEW;
@@ -194,5 +212,30 @@ public class GameManager : AGameManager {
 		{
 			audioSnapshots [1].TransitionTo (1f);
 		}
+	}
+
+	/// <summary>
+	/// Player dies.
+	/// </summary>
+	public void Die()
+	{
+		Destroy (playerInstance);
+		playerInstance = null;
+		StartCoroutine (RespawnCoroutine ());
+	}
+
+	IEnumerator RespawnCoroutine()
+	{
+		fader.BeginFade (1);
+		yield return new WaitForSeconds(fader.fadeSpeed);
+		SpawnPlayer ();
+		playerPrefab.GetComponent<PlayerController> ().PlayerState = PlayerController.ePlayerState.DEAD;
+		foreach (var ev in dieEvents) {
+			ev.Invoke ();
+		}
+		yield return new WaitForSeconds(0.25f);
+		fader.BeginFade (-1);
+		yield return new WaitForSeconds(fader.fadeSpeed);
+		playerPrefab.GetComponent<PlayerController> ().PlayerState = PlayerController.ePlayerState.ALIVE;
 	}
 }

@@ -460,6 +460,10 @@ PlayerSettings:
   XboxOnePersistentLocalStorageSize: 0
   vrEditorSettings: {}
   cloudServicesEnabled:
+    Build: 1
+    Collab: 1
+    ErrorHub: 0
+    Hub: 0
     UNet: 1
   cloudProjectId: b3350e04-bce6-4a2b-ac86-aeb1d70e746a
   projectName: GGJ2017

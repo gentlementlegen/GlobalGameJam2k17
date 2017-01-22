@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Ladder : MonoBehaviour {
 
-	[SerializeField] private float climbingSpeed = 10f;
+//	[SerializeField] private float climbingSpeed = 10f;
 	private bool isClimbing = false;
 	PlayerController currentPlayerClimbing = null;
 	private Vector2 climbTarget;
@@ -25,7 +25,7 @@ public class Ladder : MonoBehaviour {
 		if (isClimbing && currentPlayerClimbing != null)
 		{
 //			currentPlayerClimbing.transform.position = Vector3.MoveTowards(currentPlayerClimbing.transform.position, climbTarget, climbingSpeed * Time.deltaTime);
-			if (currentPlayerClimbing.transform.position.y == climbTarget.y)
+			if (Mathf.Abs(currentPlayerClimbing.transform.position.y - climbTarget.y) < 0.15f)
 			{
 				StopClimbing ();
 			}
@@ -57,10 +57,11 @@ public class Ladder : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Gets the climbing target.
+	/// Gets the climbing target. Currently always aims for top.
 	/// </summary>
 	void GetClimbingTarget()
 	{
-		climbTarget = (transform.position.y >= currentPlayerClimbing.transform.position.y) ? topPos.position : botPos.position;
+//		climbTarget = (transform.position.y >= currentPlayerClimbing.transform.position.y) ? topPos.position : botPos.position;
+		climbTarget = topPos.position;
 	}
 }

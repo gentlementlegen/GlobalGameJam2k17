@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 /// <summary>
 /// Player controller.
@@ -19,6 +20,8 @@ public class PlayerController : BasicController {
 
     GameObject item;
 
+	[SerializeField]private Image	itemIco;
+
 	protected override void Awake ()
 	{
 		base.Awake ();
@@ -30,7 +33,7 @@ public class PlayerController : BasicController {
 
 	protected override void FixedUpdate ()
 	{
-		if (PlayerState == ePlayerState.CLIMBING)
+		if (PlayerState != ePlayerState.ALIVE)
 			return;
 		base.FixedUpdate ();
 		if (Input.GetButtonDown("Climb"))
@@ -88,16 +91,19 @@ public class PlayerController : BasicController {
 	bool Use()
 	{
         Collider2D[] detectObjects = Physics2D.OverlapCircleAll(transform.position, 0.5f);
+
+		Debug.DrawLine(transform.position, transform.position + transform.right * 0.5f);
+
         foreach(Collider2D obj in detectObjects)
         {
-            if (!obj.isTrigger)
-            {
+			IActivable composantActivable = obj.gameObject.GetComponent<IActivable>();
 
-                IActivable composantActivable = obj.gameObject.GetComponent<IActivable>();
-                if (composantActivable != null)
-                {
-                    composantActivable.Activate();
-                }
+			if (composantActivable != null)
+            {
+				if (composantActivable.IsActivated ())
+					composantActivable.Activate (eActivation.STOPED);
+				else
+                	composantActivable.Activate();
             }
         }
 		return false;
@@ -125,10 +131,26 @@ public class PlayerController : BasicController {
         if (collision.gameObject.tag == "Item" && Item == null)
         {
             collision.gameObject.SetActive(false);
+			if (itemIco != null) {
+				itemIco.sprite = collision.gameObject.GetComponent<SpriteRenderer> ().sprite;
+				itemIco.color = Color.white;
+			}
             Item = collision.gameObject;
         }
-
     }
+
+	protected override void Attack ()
+	{
+	}
+
+	/// <summary>
+	/// Kills the player.
+	/// </summary>
+	new public void Die()
+	{
+		GameManager.GM.Die ();
+	}
+
     public GameObject Item
     {
         get { return item; }

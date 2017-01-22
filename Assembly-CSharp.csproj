@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{3DE0F49C-CEA0-4751-1020-B83336D2F68F}</ProjectGuid>
+    <ProjectGuid>{C9C5ACED-AF37-B251-9AC8-2374AADD4A08}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -191,13 +191,19 @@
      <Compile Include="Assets\2DxFX\Scripts\_2dxFX_Waterfall.cs" />
      <Compile Include="Assets\2DxFX\Scripts\_2dxFX_Wave.cs" />
      <Compile Include="Assets\2DxFX\Scripts\_2dxFX_WoodFX.cs" />
-     <Compile Include="Assets\ColorRampFade.cs" />
+     <Compile Include="Assets\Scripts\AActivable.cs" />
      <Compile Include="Assets\Scripts\AArtifact.cs" />
+     <Compile Include="Assets\Scripts\ABaseLevier.cs" />
      <Compile Include="Assets\Scripts\AEnergizedObject.cs" />
      <Compile Include="Assets\Scripts\AGameManager.cs" />
+     <Compile Include="Assets\Scripts\BaseLevier.cs" />
      <Compile Include="Assets\Scripts\BasicActivator.cs" />
      <Compile Include="Assets\Scripts\BasicController.cs" />
+     <Compile Include="Assets\Scripts\CallbackLevier.cs" />
+     <Compile Include="Assets\Scripts\Checkpoint.cs" />
+     <Compile Include="Assets\Scripts\ColorRampFade.cs" />
      <Compile Include="Assets\Scripts\Fading.cs" />
+     <Compile Include="Assets\Scripts\FallenObjects.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Jump.cs" />
      <Compile Include="Assets\Scripts\Ladder.cs" />
@@ -208,8 +214,11 @@
      <Compile Include="Assets\Scripts\RadioactiveArtifact.cs" />
      <Compile Include="Assets\Scripts\SpriteManager.cs" />
      <Compile Include="Assets\Scripts\TemporalArtifact.cs" />
+     <Compile Include="Assets\Scripts\TerrainBoundsChecker.cs" />
      <Compile Include="Assets\Scripts\TrapController.cs" />
+     <Compile Include="Assets\Scripts\TravelingCamera.cs" />
      <Compile Include="Assets\Scripts\WaterEffect.cs" />
+     <Compile Include="Assets\Scripts\navigate.cs" />
      <None Include="Assets\2DxFX\Resources\_2dxFX_GrayScale.shader" />
      <None Include="Assets\2DxFX\Resources\2dxfx_AL\_2dxFX_AL_PixelDie.shader" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
@@ -452,7 +461,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{C351E5F0-3E65-8A57-F360-D2A640823AA6}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{1ECCC056-403F-DE82-16EC-800D8F942A9F}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

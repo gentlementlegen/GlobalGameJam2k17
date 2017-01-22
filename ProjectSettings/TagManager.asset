@@ -50,12 +50,18 @@ TagManager:
   - name: Background
     uniqueID: 2816469977
     locked: 0
+  - name: MiddleGround
+    uniqueID: 3849227827
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 4205079987
     locked: 0
   - name: Light
     uniqueID: 584922641
     locked: 0
-  - name: Foreground
-    uniqueID: 4205079987
+  - name: Overlay
+    uniqueID: 2959128343
     locked: 0
