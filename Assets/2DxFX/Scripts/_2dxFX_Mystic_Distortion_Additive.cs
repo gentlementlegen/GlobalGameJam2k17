@@ -130,7 +130,6 @@ public class _2dxFX_Mystic_Distortion_Additive : MonoBehaviour
 			if (Pitch_Wave)
 			{
 				_Pitch_Offset=Mathf.Sin ( Time.time*_Pitch_Speed )*0.05f;
-				Debug.Log(_Pitch_Offset);
 			} else
 			{
 				_Pitch_Offset=0;
