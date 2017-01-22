@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114173393361313272}
   - component: {fileID: 58167066044466654}
   - component: {fileID: 250806554956843664}
+  - component: {fileID: 61266896508240658}
   m_Layer: 0
   m_Name: MagneticArtifact
   m_TagString: Artifact
@@ -49,7 +50,7 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1471782400383740}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -57,6 +58,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 7.027569
+--- !u!61 &61266896508240658
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1471782400383740}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1.4, y: 2.76}
 --- !u!114 &114173393361313272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -69,6 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state: 1
+  _message: {fileID: 0}
 --- !u!212 &212918075010497466
 SpriteRenderer:
   m_ObjectHideFlags: 1

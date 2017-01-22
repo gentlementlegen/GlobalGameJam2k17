@@ -35,7 +35,7 @@ public abstract class AArtifact : MonoBehaviour, IActivable {
 
 	void FixedUpdate()
 	{
-		RaycastHit2D[] hits = Physics2D.CircleCastAll (transform.position, 2, transform.forward);
+		RaycastHit2D[] hits = Physics2D.CircleCastAll (transform.position, 0.5f, transform.forward);
 	
 		foreach (RaycastHit2D hit in hits) {
 			if (hit.collider.tag == "Player") {
